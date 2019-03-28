@@ -176,7 +176,8 @@ $product_name="测试订单";
 
                 <i class="i1"></i>
                 <span>支付宝扫码</span>
-            </li></label>
+            </li>
+            </label>
 
 
            
@@ -219,7 +220,8 @@ $product_name="测试订单";
 		
 			 <label for="yl">
             <li class="pay_li" data_power_id="3000000061" data_product_id="3000000061">
-                <input value="911" name="channel" id="yl" type="radio">
+<!--                <input value="911" name="channel" id="yl" type="radio">-->
+                <input value="903" name="channel" id="yl" type="radio">
 
                 <i class="i3"></i>
                 <span>银联快捷</span>
@@ -231,7 +233,8 @@ $product_name="测试订单";
 			
             <label for="jd">
             <li class="pay_li" data_power_id="3000000071" data_product_id="3000000071">
-                <input value="907" name="channel" id="jd" type="radio">
+<!--                <input value="907" name="channel" id="jd" type="radio">-->
+                <input value="903" name="channel" id="jd" type="radio">
 
                 <i class="i3"></i>
                 <span>在线网银</span>

@@ -25,7 +25,7 @@ class PayController extends Controller
      */
     public function orderadd($parameter)
     {
-        var_dump($parameter);
+//        var_dump($parameter);
         $pay_amount = I("post.pay_amount", 0);
 
         //通道信息
