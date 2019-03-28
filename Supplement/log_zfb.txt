@@ -1,0 +1,14 @@
+2018-09-23 07:02:38   <br />
+<b>Notice</b>:  Undefined index: update_time in <b>/opt/lampp/htdocs/ctp/view/server/aotori/monitorTrans.php</b> on line <b>261</b><br />
+{"respCode":"0000","respDesc":"\u8865\u5355\u6210\u529f","serverRspNo":"201809230702381902","sign":"0a8fb5fb847ddcc2bef3f42e250a9a3e"}
+2018-09-23 07:02:43   {"respCode":"0002","respDesc":"\u8be5\u4ea4\u6613\u6d41\u6c34\u53f7\u4e3a\u6210\u529f\u72b6\u6001\uff0c\u4e0d\u53ef\u518d\u5339\u914d","serverRspNo":"201809230702430715","sign":""}
+2018-09-23 08:04:20   <br />
+<b>Notice</b>:  Undefined index: update_time in <b>/opt/lampp/htdocs/ctp/view/server/aotori/monitorTrans.php</b> on line <b>261</b><br />
+{"respCode":"0000","respDesc":"\u8865\u5355\u6210\u529f","serverRspNo":"201809230804195957","sign":"c5eb489a5f7ecd23580ff168e995c5df"}
+2018-09-23 08:36:01   <br />
+<b>Notice</b>:  Undefined index: update_time in <b>/opt/lampp/htdocs/ctp/view/server/aotori/monitorTrans.php</b> on line <b>261</b><br />
+{"respCode":"0000","respDesc":"\u8865\u5355\u6210\u529f","serverRspNo":"201809230836006411","sign":"930d259d62006397d1b05d2b0f3bdc09"}
+2018-09-23 08:36:07   {"respCode":"0002","respDesc":"\u8be5\u4ea4\u6613\u6d41\u6c34\u53f7\u4e3a\u6210\u529f\u72b6\u6001\uff0c\u4e0d\u53ef\u518d\u5339\u914d","serverRspNo":"201809230836069961","sign":""}
+2018-09-23 10:03:52   <br />
+<b>Notice</b>:  Undefined index: update_time in <b>/opt/lampp/htdocs/ctp/view/server/aotori/monitorTrans.php</b> on line <b>261</b><br />
+{"respCode":"0000","respDesc":"\u8865\u5355\u6210\u529f","serverRspNo":"201809231003513361","sign":"f0e76755e44de6ecc6a5d0d9d9e133d3"}

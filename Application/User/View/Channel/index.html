@@ -1,0 +1,40 @@
+<include file="Public/header"/>
+<div class="row">
+    <div class="col-md-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>查看通道费率</h5>
+            </div>
+            <!--条件查询-->
+            <div class="ibox-content">
+                <blockquote class="layui-elem-quote">
+                    <p class="text-danger">结算方式：
+                        <if condition="$tkconfig[t1zt] eq 1">T+1<elseif condition="$tkconfig[t1zt] eq 0"/>T+0</if></p>
+                </blockquote>
+                <table class="layui-table" lay-skin="row">
+                    <thead>
+                    <tr>
+                        <th>通道编码</th>
+                        <th>通道名称</th>
+                        <th>通道费率(千分)</th>
+                        <th>通道状态</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <volist name="list" id="p">
+                        <tr>
+                            <td><{$p.id}></td>
+                            <td><{$p.name}></td>
+                            <td><{$p[feilv]*1000}> ‰</td>
+                            <td><if condition="$p['status'] eq 1">已开通</if></td>
+                        </tr>
+                    </volist>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<include file="Public/footer"/>
+</body>
+</html>

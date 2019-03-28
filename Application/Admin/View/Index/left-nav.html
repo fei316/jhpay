@@ -1,0 +1,49 @@
+<nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="nav-close"><i class="fa fa-times-circle"></i></div>
+    <div class="sidebar-collapse">
+        <ul class="nav" id="side-menu">
+           
+            <volist name="navmenus" id="nm">
+                <li><a href="<if condition="!count($nm[$nm['id']])"><{:U($nm[menu_name])}><else/>#</if>"> 
+                  <i class="<{$nm['icon']}>"></i> <span
+                        class="nav-label"><{$nm['title']}></span>
+                    <if condition="$nm[$nm['id']]"><span class="fa arrow"></span> </if></a>
+                    <if condition="$nm[$nm['id']]">
+                    <ul class="nav nav-second-level">
+                        <volist name="nm[$nm['id']]" id="sub">
+                            <li><a href="<{:U($sub[menu_name])}>" class="J_menuItem"><i
+                                    class="<{$sub['icon']}>"></i> <{$sub['title']}></a></li>
+                        </volist>
+                    </ul>
+                    </if>
+                </li>
+            </volist>
+              
+              <li><a href="#"> <i
+                    class="fa fa-user-circle"></i> <span
+                        class="nav-label">其他功能</span>
+                    <span class="fa arrow"></span></a>
+               
+                    <ul class="nav nav-second-level">
+                      <li><a href="/admin_Order_frozenOrder.html" class="J_menuItem">
+                          <i class="fa fa-vcard "></i> 异常订单排查</a></li>
+
+                      <li><a href="/admin_Order_delAll.html" class="J_menuItem">
+                          <i class="fa fa-vcard "></i> 批量删除订单</a></li>
+                      
+                      <li><a href="/admin_Auth_nodes.html" class="J_menuItem">
+                          <i class="fa fa-vcard "></i> 手动订单系统</a></li>                   
+                        <li><a href="/admin_Template.html" class="J_menuItem">
+                          <i class="fa fa-vcard "></i> 模板管理</a></li>
+                       <li><a href="/admin_User_agentCateList.html" class="J_menuItem">
+                          <i class="fa fa-vcard "></i> 用户分类管理</a></li>
+                      <li>  <a href="<{:U('Admin/Index/clearCache')}>"><i class="fa fa-vcard "></i>清除缓存 </a></li>
+                      <!--<li><a href="/admin_Update_update.html" class="J_menuItem">
+                        <i class="fa fa-street-view"></i> 在线升级</a></li> 
+                      <li><a href="/admin_Menu_nodes.html" class="J_menuItem">
+                        <i class="fa fa-universal-access"></i> 版权所有</a></li>-->
+                </ul>                
+          </li>
+   </ul>  
+    </div>
+</nav>

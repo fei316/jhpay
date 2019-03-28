@@ -1,0 +1,234 @@
+<include file="Public/header"/>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5>商户名称：<{$fans.username}></h5><h5>&nbsp;&nbsp;商户ID：<{$fans.memberid}></h5>
+      </div>
+      <div class="ibox-content">
+        <p>上次登录IP：<{$lastlogin.loginip}>，登录地址：<{$lastlogin.loginaddress}>，登录时间：<{$lastlogin.logindatetime}></p>
+        <notempty name="ipItem">
+        <p>可登录IP：
+            <foreach name="ipItem" item="v" key="k">
+                [<{$k}>]<{$v}> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </foreach>
+        </p>
+        </notempty>
+      </div>
+    </div>
+  </div>
+</div>
+ <div class="row zuy-nav">
+<eq name="fans[groupid]" value="4">
+
+  <div class="col-sm-3">
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5><{$stat.todayordercount}></h5>
+      </div>
+      <div class="ibox-content" style="height: 80px">
+        <h1 class="no-margins">今日总订单数</h1>
+        <div class="stat-percent font-bold text-success">单</div>
+      </div>
+    </div>
+  </div>
+    
+  <div class="col-sm-3" >
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5><{$stat.todayorderpaidcount}></h5>
+      </div>
+      <div class="ibox-content" style="height: 80px">
+        <h1 class="no-margins">今日已付订单数</h1>
+        <div class="stat-percent font-bold text-success">单</div>
+      </div>
+    </div>
+  </div>
+    
+    <div class="col-sm-3">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <h5><{$stat.todayordernopaidcount}></h5>
+        </div>
+        <div class="ibox-content" style="height: 80px">
+          <h1 class="no-margins">今日未付订单</h1>
+          <div class="stat-percent font-bold text-success">单</div>
+        </div>
+      </div>
+  </div>
+      
+  <div class="col-sm-3">
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5><{$stat.today_income}></h5>
+      </div>
+      <div class="ibox-content" style="height: 80px">
+        <h1 class="no-margins">今日总入金</h1>
+        <div class="stat-percent font-bold text-success">元</div>
+      </div>
+    </div>
+  </div>
+    </eq>
+    </div>
+    
+    
+  <div class="row">
+    <eq name="fans[groupid]" value="4">
+    <div class="col-sm-3">
+      <div class="ibox float-e-margins">
+        
+        <div class="ibox-title">
+          <h5><{$stat.todayorderactualsum}></h5>
+        </div>
+          
+        <div class="ibox-content" style="height: 80px">
+          <h1 class="no-margins">今日实付金额</h1>
+          <div class="stat-percent font-bold text-success">元</div>
+        </div>
+          
+      </div>
+    </div>
+    </eq>
+      
+    <div class="col-sm-3">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <h5><{$fans['balance']}></h5>
+        </div>
+        <div class="ibox-content"  style="height: 80px">
+          <h1 class="no-margins">账户余额</h1>
+          <div class="stat-percent font-bold text-success">元</div>
+          <small>可提现</small>
+        </div>
+      </div>
+    </div>
+      
+    <div class="col-sm-3">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <h5><{$fans['blockedbalance']}></h5>
+        </div>
+        <div class="ibox-content"  style="height: 80px">
+          <h1 class="no-margins">冻结资金</h1>
+          <div class="stat-percent font-bold text-info">元</div>
+          <small>待解冻</small>
+        </div>
+      </div>
+    </div>
+      
+    <div class="col-sm-3">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <h5><{$stat.complaints_deposit}></h5>
+        </div>
+        <div class="ibox-content"  style="height: 80px">
+          <h1 class="no-margins">投诉保证金</h1>
+          <div class="stat-percent font-bold text-info">元</div>
+          <small>待解冻</small>
+        </div>
+      </div>
+    </div>
+ </div>
+     
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="ibox float-e-margins">
+
+        <div class="ibox-title">
+          <h5>平台公告</h5>
+        </div>
+        <div class="ibox-content">
+          <ul class="list-unstyled">
+            <volist name="gglist" id="vo">
+               <li style="line-height:30px;"><a href="<{:U('Index/showcontent',['id'=>$vo['id']])}>"><{$vo.title}></a> <div style="float:right"><{$vo.createtime|date="Y-m-d",###}></div> </li>
+            </volist>
+          </ul>
+        </div>
+          
+      </div>
+    </div>
+  </div>
+    </div>
+  </div>
+
+  <!--<div class="row">
+    <div class="col-md-12">
+      <div class="ibox float-e-margins">
+        
+        <div class="ibox-title">
+          <h5>日交易统计</h5>
+        </div>
+        <div class="ibox-content">
+          <div id="main" style="height:300px"></div>
+        </div>
+        
+      </div>
+    </div>
+  </div> -->
+
+<!-- 全局js -->
+<script src="<{$siteurl}>Public/Front/js/jquery.min.js"></script>
+<script src="<{$siteurl}>Public/Front/js/bootstrap.min.js"></script>
+<script src="<{$siteurl}>Public/Front/js/content.js?v=1.0.0"></script>
+<script src="/Public/Front/js/echarts.common.min.js"></script>
+<script type="text/javascript">
+    var myChart = echarts.init(document.getElementById('main'));
+    var option = {
+        title : {
+            text: '交易订单概况',
+            subtext: '按天统计'
+        },
+        tooltip : {
+            trigger: 'axis'
+        },
+        legend: {
+            data:['成交','金额']
+        },
+        toolbox: {
+            show : true,
+            feature : {
+                mark : {show: true},
+                dataView : {show: true, readOnly: false},
+                magicType : {show: true, type: ['line', 'bar', 'stack', 'tiled']},
+                restore : {show: true},
+                saveAsImage : {show: true}
+            }
+        },
+        calculable : true,
+        xAxis : [
+            {
+                type : 'category',
+                boundaryGap : false,
+                data : <{$category}>
+            }
+        ],
+        yAxis : [
+            {
+                type : 'value'
+            }
+        ],
+        series : [
+            {
+                name:'成交',
+                type:'line',
+                smooth:true,
+                itemStyle: {normal: {areaStyle: {type: 'default'}}},
+                data:<{$dataone}>
+            },
+            {
+                name:'金额',
+                type:'line',
+                smooth:true,
+                itemStyle: {normal: {areaStyle: {type: 'default'}}},
+                data:<{$datatwo}>
+            }
+        ]
+    };
+
+    // 为echarts对象加载数据
+    myChart.setOption(option);
+</script>
+</body>
+</html>

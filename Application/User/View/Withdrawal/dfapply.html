@@ -1,0 +1,207 @@
+<include file="Public/header"/>
+<div class="row">
+    <div class="col-md-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>代付申请</h5>
+            </div>
+         
+            <div class="ibox-content">
+               <br>
+				<div class="layui-tab">
+					  <ul class="layui-tab-title">
+						<li class="layui-this"><a href="<{:U("Withdrawal/dfapply")}>">表单提交方式</a></li>
+						<li><a href="<{:U("Withdrawal/entrusted")}>">EXCEL导入方式</a></li>
+					  </ul>
+				</div>
+                <blockquote class="layui-elem-quote">
+                    <span style="margin:0 10px;" class="text-danger">可提现：<{$info['balance']}> 元</span>
+                    <span style="margin:0 10px;" class="text-muted">冻结资金：<{$info['blockedbalance']}> 元</span>
+                    <span style="margin:0 10px;" class="text-warning">结算方式：<if condition="$tkconfig[t1zt] eq 1">T+1<elseif
+                            condition="$tkconfig[t1zt] eq 0"/>T+0</if></span> <br>
+                    <span style="margin:0 10px;" class="text-danger">最低提现：<{$tkconfig[tkzxmoney]}> 元</span>
+                      <span style="margin:0 10px;" class="text-success">单笔最高：<{$tkconfig[tkzdmoney]}> 元</span>
+                </blockquote>
+              <div class="layui-inline">
+                <button type="button" class="layui-btn layui-btn-danger" onclick="addRow()"><span
+                        class="glyphicon glyphicon-plus"></span> 新增
+                </button>
+                </div>
+                  
+                <form class="layui-form  layui-table-body" id="df_form">
+                  
+                 <div class="layui-inline">
+                <table class="layui-table">
+                        <thead>
+                        <tr>
+                 <th>#</th>
+                 <th>结算金额</th>
+                           <th>结算卡联行号</th>
+                    <volist name="extend_fields" k="key" id="vo">
+                            <th style="width:100%">结算银行卡</th>
+                            </volist>                       
+                          <!--<th>查询</th>
+                            <th>操作</th> -->
+                         
+                        </tr>
+                        </thead>
+                        <tbody id="container">
+                            <tr> <td>
+                                1
+                                </td>
+                                
+                                <td>
+                                    <input type="text" name="item[1][tkmoney]" lay-verify=""  autocomplete="off"
+                                           placeholder="代付金额"  class="layui-input df_item" style="width:150px" required>
+                                </td>
+                               <volist name="extend_fields" k="key" id="vo">
+                                <td>
+                                  <input type="text" name="item[1][extend][<{$key}>]" lay-verify="" autocomplete="off"   placeholder=""  readonly onfocus="this.removeAttribute('readonly');" required class="layui-input df_item" style="width:150px"></td>
+                                </volist>
+                               <td>
+                                    <select name="item[1][bank]" class="layui-select df_item">
+                                    <option value=""></option>
+                                    <volist class="layui-input" name="bankcards" id="b">
+                                        <option value="<{$b.id}>">【<{$b.accountname}>】<{$b.bankname}>(<{$b.cardnumber}>)<{$b.alias}></option>
+                                    </volist>
+                                    </select>
+                                </td>
+                                          
+                               
+                           
+                                 
+                                           </tr>
+                        </tbody>
+                    </table> </div>
+                      <div class="layui-form-mid layui-word-aux">注：结算银行卡联行号为必填项，<a href="http://www.eoeit.cn/lianhanghao/index.php" target="_blank"><font color="#f00">点这里查询银行卡联行号</font></a>。</div>      
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">支付密码：</label>
+                        <div class="layui-input-inline">
+                          <input style="display:none"><!-- for disable autocomplete on chrome -->
+                            <input type="password" name="password" lay-verify="pass" placeholder="请输入支付密码" readonly onfocus="this.removeAttribute('readonly');" required autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-mid layui-word-aux">注：代付金额最小 <{$tkconfig.tkzxmoney}> 元，代付手续费单笔 <{$tkconfig.sxffixed}>  元，直接在提现金额中扣除。</div>  
+                     <if condition="$verifyGoogle and $verifysms">
+                        <div class="layui-form-item" id="df_auto_check">
+                            <label class="layui-form-label">验证方式：</label>
+                            <div class="layui-input-block">
+                                <input type="radio" name="auth_type" lay-filter="auth_type" value="1" title="谷歌安全码"   checked>
+                                <input type="radio" name="auth_type" lay-filter="auth_type" value="0" title="短信验证码">
+                            </div>
+                        </div>
+                        <else />
+                        <input type="hidden" name="auth_type" value="<{$auth_type}>">
+                    </if>
+                    <eq name="verifyGoogle" value="1">
+                        <div class="layui-form-item" id="auth_google">
+                            <label class="layui-form-label">谷歌安全码：</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="google_code" autocomplete="off"
+                                       placeholder="请输入谷歌安全码" class="layui-input" value="">
+                            </div>
+                        </div>
+                    </eq> 
+                    <eq name="verifysms" value="1">
+                        <div id="auth_sms" <if condition="$verifyGoogle and $verifysms">style="display: none"</if>>
+                        <include file="Public/send"/>
+                        </div>
+                    </eq>
+
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <button class="layui-btn" lay-submit="" lay-filter="save">提交申请</button>
+                          <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        </div>
+                    </div>
+                </form>
+        </div>
+    </div>
+</div>
+<include file="Public/footer"/>
+<script>
+    var rowCount=1;
+    //添加行
+    function addRow(){
+        rowCount++;
+         var newRow='<tr id="option'+rowCount+'">' + '<td>'+rowCount+'</td> <td>'+
+            '<input type="text" name="item['+rowCount+'][tkmoney]" lay-verify="" placeholder="代付金额"  autocomplete="off" class="layui-input df_item" style="width:150px"></td>';
+           <volist name="extend_fields" k="key" id="vo">
+            newRow+='<td><input type="text" name="item['+rowCount+'][extend][<{$key}>]" lay-verify="" placeholder="" autocomplete="off" class="layui-input df_item" style="width:150px"></td>';
+            </volist>
+        newRow+='</select></td><td>'+ '<select name="item['+rowCount+'][bank]" class="layui-select df_item">'+
+            '<option value=""></option>';
+        
+        <volist class="layui-input" name="bankcards" id="b">
+            newRow+='<option value="<{$b.id}>">【<{$b.accountname}>】<{$b.bankname}>(<{$b.cardnumber}>)<{$b.alias}></option>';
+             </volist>
+        newRow+='<td>';
+        newRow+=' <button class="layui-btn layui-btn-small"  onclick="$(this).parent().parent().remove();">删除</button></td></tr>';
+        $('#container').append(newRow);
+        layui.form.render();
+    }
+    var issubmit=false;
+    layui.use(['form', 'layer','element'], function(){
+        var layer = layui.layer //弹层
+            ,form = layui.form
+            ,element = layui.element; //元素操作
+
+        //监听提交
+        form.on('submit(save)', function(data){
+            var a_num =0;
+            layer.confirm('确定提现发起代付申请？', {
+                btn: ['确定','取消'] //按钮
+            }, function(){
+                a_num+=1;
+                if(a_num == 1) {//控制点击次数，防止重复提交
+                    var flag = false;
+                    $('.df_item').each(function(){
+                        if($(this).val() == '') {
+                            flag = true;
+                            return false;
+                        }
+                    });
+                    if(flag == true) {
+                        layer.alert('提交参数存在空值，请检查后再提交！');
+                        return false;
+                    }
+                    $.ajax({
+                        url:"<{:U('Withdrawal/dfsave')}>",
+                        type:"post",
+                        data:$('#df_form').serialize(),
+                        success:function(res){
+                            if(res.status){
+                                layer.alert("申请成功", {icon: 6},function () {
+                                    location.reload();
+                                    var index = parent.layer.getFrameIndex(window.name);
+                                    parent.layer.close(index);
+                                });
+                            }else{
+                                layer.alert(res.info ? res.info : "申请失败", {icon: 5},function () {
+                                    location.reload();
+                                    var index = parent.layer.getFrameIndex(window.name);
+                                    parent.layer.close(index);
+                                });
+                            }
+                        }
+                    });
+                }
+            }, function(){
+
+            });
+
+            return false;
+        });
+        form.on('radio(auth_type)',function(data){
+            if(data.value == 1) {
+                $('#auth_google').show();
+                $('#auth_sms').hide();
+            } else {
+                $('#auth_google').hide();
+                $('#auth_sms').show();
+            }
+        });
+    });
+</script>
+</body>
+</html>
