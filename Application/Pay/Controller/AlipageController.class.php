@@ -102,7 +102,10 @@ class AlipageController extends PayController
             $signData .= $key . '=' . $val . "&";
         }
         $signData = trim($signData, '&');
-        //$checkResult = $aop->verify($signData,$sign,$publiKey,$sign_type);
+//        vendor('Alipay.aop.AopClient');
+//        $aop                     = new \AopClient();
+//        $checkResult = $aop->verify($signData,$sign,$publiKey,$sign_type);
+
         $res    = "-----BEGIN PUBLIC KEY-----\n" . wordwrap($publiKey, 64, "\n", true) . "\n-----END PUBLIC KEY-----";
         $result = (bool) openssl_verify($signData, base64_decode($sign), $res, OPENSSL_ALGO_SHA256);
 
