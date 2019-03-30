@@ -114,6 +114,8 @@ class UserController extends BaseController
             $list[$k]['complaintsDeposit']       = number_format((double) $deposit['complaintsDeposit'], 2, '.', '');
             $list[$k]['complaintsDepositPaused'] = number_format((double) $deposit['complaintsDepositPaused'], 2, '.', '');
         }
+//        var_dump($list);
+//        var_dump(getParentName(10069));
         $this->assign('rows', $rows);
         $this->assign("list", $list);
         $this->assign('page', $page->show());
