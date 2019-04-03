@@ -31,8 +31,41 @@ class IndexController extends UserController
         $module = strtolower(trim(__MODULE__, '/'));
         $module = trim($module, './');
         $loginout = U($module . "/Login/loginout");
+        $user_info = session('user_auth');
+        $navmenus = $this->getUserRules($user_info['uid']);
+        $this->assign('navmenus', $navmenus);
         $this->assign('loginout', $loginout);
         $this->display();
+    }
+
+    public function getUserRules($user_id)
+    {
+        $where = array('a.id' => $user_id);
+        $rules = M('member')->alias('a')->where($where)->join("left join pay_auth_group b on b.id = a.groupid")->field("b.rules")->find();
+
+        if(!$rules){
+            return array();
+        }
+        $rules_str = $rules['rules'];
+        $rules_arr = array_unique(explode(',', $rules_str));
+
+        $menus = $this->getMenus($rules_arr);
+        $menus = get_column($menus, 2);
+
+        //dump($menus);exit;
+        return $menus;
+
+    }
+
+    public function getMenus($rules_arr ,$is_menu=1)
+    {
+        $where = array(
+            'id' => array('in', $rules_arr),
+            'is_menu' => 1,
+            'status' => 1,
+        );
+
+        return M('auth_rule')->where($where)->select();
     }
 
     public function main()

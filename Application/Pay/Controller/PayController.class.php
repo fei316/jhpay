@@ -415,6 +415,7 @@ class PayController extends Controller
         if (!isset($member_info)) {
             $member_info = M('Member')->where(['id' => $userid])->find();
         }
+//        file_put_contents('member.txt', var_export($member_info, true));
         $sign                   = $this->createSign($member_info['apikey'], $return_array);
         $return_array["sign"]   = $sign;
         $return_array["attach"] = $order_info["attach"];
@@ -451,6 +452,12 @@ class PayController extends Controller
                 break;
 
             case '1':
+                //更新交易状态
+                $order_where = [
+                    'id'          => $order_info['id'],
+                    'pay_orderid' => $order_info["pay_orderid"],
+                ];
+                $order_result = $m_Order->where($order_where)->setField("pay_status", 2);
                 $this->setHtml($order_info["pay_callbackurl"], $return_array);
                 break;
 
@@ -671,6 +678,7 @@ class PayController extends Controller
             }
         }
         $sign = strtoupper(md5($md5str . "key=" . $Md5key));
+//        file_put_contents('md5.txt', $md5str . "key=" . $Md5key);
         return $sign;
     }
 

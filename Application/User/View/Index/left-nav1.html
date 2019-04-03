@@ -1,0 +1,24 @@
+<nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="nav-close"><i class="fa fa-times-circle"></i></div>
+    <div class="sidebar-collapse">
+        <ul class="nav" id="side-menu">
+
+            <volist name="navmenus" id="nm">
+                <li><a href="<if condition="!count($nm[$nm['id']])"><{:U($nm[menu_name])}><else/>#</if>">
+                    <i class="<{$nm['icon']}>"></i> <span
+                            class="nav-label"><{$nm['title']}></span>
+                    <if condition="$nm[$nm['id']]"><span class="fa arrow"></span> </if></a>
+                    <if condition="$nm[$nm['id']]">
+                        <ul class="nav nav-second-level">
+                            <volist name="nm[$nm['id']]" id="sub">
+                                <li><a href="<{:U($sub[menu_name])}>" class="J_menuItem"><i
+                                        class="<{$sub['icon']}>"></i> <{$sub['title']}></a></li>
+                            </volist>
+                        </ul>
+                    </if>
+                </li>
+            </volist>
+
+        </ul>
+    </div>
+</nav>

@@ -196,6 +196,7 @@ function getParentName($uid, $s = 0)
     if (! $uid) {
         return "-";
     }
+    $uid = $uid - 10000;
     $find = $User->where(["id" => $uid])->field('id,username,groupid')->find();
     if ($find["groupid"] == 1) {
         return "总管理员";

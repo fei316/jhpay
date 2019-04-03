@@ -9,7 +9,8 @@ header('Content-type:text/html;charset=utf-8');
             "returncode" => $_REQUEST["returncode"]
         );
       
-        $Md5key = "ubn8yqhzmwj2kch0gx3xja2is7ofqenn";
+        $Md5key = "4tgo1gbwpymxatcefw3nzjejirc9bie6";
+
 		ksort($ReturnArray);
         reset($ReturnArray);
         $md5str = "";
