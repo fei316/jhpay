@@ -1,3 +1,5 @@
+
+
 #**支付系统接口文档**
 
 系统的注意安装事项
@@ -235,7 +237,7 @@ header('Content-type:text/html;charset=utf-8');
             if ($_REQUEST["returncode"] == "00") {
 				   $str = "交易成功！订单号：".$_REQUEST["orderid"];
                    file_put_contents("success.txt",$str."\n", FILE_APPEND);
-				   exit("ok");
+				   exit("OK");
             }
         }
 ?>
